@@ -51,7 +51,6 @@ onEvent('block.left_click', event =>{
     }
 })//确定2点
 
-
 onEvent("command.registry", event => {//监听命令注册事件
     const{commands: Commands, arguments: Arguments} = event;
     event.register(// 注册新命令
@@ -59,11 +58,13 @@ onEvent("command.registry", event => {//监听命令注册事件
         .requires(src => src.hasPermission(2))
         .then(Commands.argument('level', Arguments.FLOAT.create(event))//等级参数
         .then(Commands.argument('name', Arguments.STRING.create(event))//说明参数
-        .then(Commands.argument('text', Arguments.STRING.create(event))//说明参数
-        .executes(ctx => {// 执行命令时执行以下内容
+        .then(Commands.argument('text', Arguments.STRING.create(event))
+        .then(Commands.argument('status', Arguments.BOOLEAN.create(event))
+            .executes(ctx => {// 执行命令时执行以下内容
             const level = Arguments.FLOAT.getResult(ctx, "level");// 获取等级参数
             const name = Arguments.STRING.getResult(ctx, "name");
             const text = Arguments.STRING.getResult(ctx, "text");// 获取说明参数
+            const status = Arguments.BOOLEAN.getResult(ctx, "status");//获取状态参数
             let User = ctx.source.entity
             if(User.stages.has("enclosuring1")&&User.stages.has("enclosuring2")){
                 User.stages.remove("enclosuring1")
@@ -75,14 +76,12 @@ onEvent("command.registry", event => {//监听命令注册事件
                 let enY2 = change(enclosureY1,enclosureY2)[1]
                 let enZ1 = change(enclosureZ1,enclosureZ2)[0]
                 let enZ2 = change(enclosureZ1,enclosureZ2)[1]//进行坐标排序
-                let AreaNo = `Area${enclosure.settedArea++}`
-                enclosure.AreaS[AreaNo] = {"Point1":[enX1,enY1,enZ1],"Point2":[enX2,enY2,enZ2],"name":name,"level":level,"text":text,"isOpen":false}
+    
+                let AreaNo = `Area${enclosure.settedArea}`
+                enclosure.AreaS[AreaNo] = {"Point1":[enX1,enY1,enZ1],"Point2":[enX2,enY2,enZ2],"name":name,"level":level,"text":text, "status":status}
                 JsonIO.write('kubejs/serverJson/enclosure.json',enclosure)//写入已有的区域
-                // enclosure.settedArea++;
-
+                enclosure.settedArea++;
             }
-            return 0
-            
-        }))))
-    )
+            return 0 
+        }))))))
 })
