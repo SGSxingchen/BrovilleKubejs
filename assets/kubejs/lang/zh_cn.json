@@ -1,0 +1,38 @@
+{
+    "item.kubejs.call_op": "\u00A76\u00A7lOP呼叫符",
+    "item.kubejs.copper_splint": "铜制护甲板",
+    "item.kubejs.leather_sheet": "皮革薄板",
+    "item.kubejs.diamond_plate": "钻石板",
+    "item.kubejs.letsee": "无线电",
+    "item.kubejs.letsee4": "空的无线电",
+    "item.kubejs.letknow": "电池",
+    "item.kubejs.circuit_board": "电路板",
+    "item.kubejs.steel_ingot": "锻钢",
+    "item.kubejs.steel_sheet": "锻钢板",
+    "item.kubejs.steel_nugget": "锻钢粒",
+    "item.kubejs.steel_shield": "锻钢盾",
+    "item.kubejs.cooked_leather": "熟制皮革",
+    "item.kubejs.bone_ingot": "坚硬骨片",
+    "item.kubejs.treated_cooked_flesh": "熟骨肉",
+    "item.kubejs.treated_flesh": "处理过的生骨肉",
+    "item.kubejs.shupitao_chestplate": "树皮衣",
+    "item.kubejs.shupitao_boots": "树皮拖孩",
+    "item.kubejs.shupitao_helmet": "树皮帽",
+    "item.kubejs.shupitao_leggings": "树皮裙",
+    "item.kubejs.gutao_chestplate": "骨胸甲",
+    "item.kubejs.gutao_boots": "骨靴子",
+    "item.kubejs.gutao_helmet": "骨帽子",
+    "item.kubejs.gutao_leggings": "骨护腿"
+    "item.kubejs.lumber": "船板木材",
+    "item.kubejs.scrap1_helmet": "游商帽",
+    "item.kubejs.scrap1_leggings": "游商下摆",
+    "item.kubejs.scrap1_chestplate": "游商长袍",
+    "item.kubejs.scrap1_boots": "游商鞋",
+    "item.kubejs.scrap2_helmet": "蒙面头巾",
+    "item.kubejs.scrap2_leggings": "紧身皮裤",
+    "item.kubejs.scrap2_chestplate": "黑风外衣",
+    "item.kubejs.scrap2_boots": "海盗短靴",
+    "item.kubejs.sea_cutlass": "破浪者匕首"
+
+
+}
