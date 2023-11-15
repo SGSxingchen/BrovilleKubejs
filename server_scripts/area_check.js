@@ -6,6 +6,7 @@ Area = JsonIO.read('kubejs/serverJson/enclosure.json')//读取文件
 function between(x,num1,num2) {//判断一个数是否在两个数之间的函数
     return (x <= num1 && x>=num2)
 }
+
 function inArea(p,a) {//判断玩家是否在区域内的函数
     return (
         between(p.x, a.Point1[0], a.Point2[0]) &&
@@ -13,6 +14,16 @@ function inArea(p,a) {//判断玩家是否在区域内的函数
         // && between(p.y, a.Point1[1], a.Point2[1])
     )
 }
+
+function deviation(x,p1,p2,d) {//偏移函数
+    let midp = (p1+p2)/2
+    if (x<midp) {
+        return x-d
+    }else if (x >= midp){
+        return x+d
+    }
+}
+
 function inIllegalArea(p){
     if(p.stages.has("OP")){
         return false
@@ -25,6 +36,8 @@ function inIllegalArea(p){
     // p.tell("你正处于非法区域")
     return true
 }
+
+
 function getGradientColor(value) {
     if (value < 0 || value > 5) {
         throw new Error('Value must be between 0 and 5');
@@ -40,6 +53,7 @@ function getGradientColor(value) {
 
     return `#${redHex}${greenHex}00`; // 固定蓝色分量为0
 }
+
 function SendAreaIllegleInfo(e){
     var time = e.player.persistentData.illegalTime
     e.player.paint({
@@ -78,6 +92,7 @@ function SendAreaIllegleInfo(e){
         }
     });
 }
+
 function SendAreaJoinInfo(e,i){
     var name = Area.AreaS[`Area${i}`].name
     var level = Area.AreaS[`Area${i}`].level
@@ -126,6 +141,7 @@ function SendAreaJoinInfo(e,i){
         }
     });
 }
+
 function SendAreaLeaveInfo(e,i){
     var name = Area.AreaS[`Area${i}`].name
     var level = Area.AreaS[`Area${i}`].level
@@ -173,13 +189,14 @@ function SendAreaLeaveInfo(e,i){
         }
     });
 }
+
 onEvent("server.tick", event =>{
     Area = enclosure
-})
+})//同步
 
 onEvent("player.tick",event =>{
     for (let i = 0; i < Area.settedArea; i++) {
-        if (inArea(event.player, Area.AreaS[`Area${i}`]) && !event.player.stages.has(`inArea${i}`) && Area.AreaS[`Area${i}`].isOpen)
+        if (inArea(event.player, Area.AreaS[`Area${i}`]) && !event.player.stages.has(`inArea${i}`) && Area.AreaS[`Area${i}`].status)
         {
             event.player.stages.add(`inArea${i}`)
             SendAreaJoinInfo(event,i)
