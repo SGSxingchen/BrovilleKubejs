@@ -35,3 +35,20 @@ onEvent('lootjs',(event) =>{
     }
     
 })
+
+onEvent('item.food_eaten', event => {
+    if ((event.item.id == 'kubejs:treebark_cup_purewater')||(event.item.id == 'kubejs:treebark_cup_water')) {
+        event.player.giveInHand('kubejs:treebark_cup')
+    }
+})
+
+onEvent('item.right_click', event => {
+    let player = event.player
+    if (player.getHeldItem(event.hand) == 'kubejs:treebark_cup') {
+        let target = player.rayTrace(5)
+        if (target.block.id == 'minecraft:water') {
+            player.setHeldItem(event.hand, Item.of('kubejs:treebark_cup', (player.getHeldItem(event.hand).count - 1)))
+            player.giveInHand('kubejs:treebark_cup_water')
+        }
+    }
+})
