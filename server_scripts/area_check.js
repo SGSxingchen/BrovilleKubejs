@@ -1,4 +1,4 @@
-//code by Yakumo_UUZ & LanStarD
+//code by Yakumo_UUZ
 
 var Area
 Area = JsonIO.read('kubejs/serverJson/enclosure.json')//读取文件
@@ -222,3 +222,4 @@ onEvent("player.tick",event =>{
     }
 })
 
+//就是界面上显示文字……实在有点看不清，但先不管了
