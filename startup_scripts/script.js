@@ -7,6 +7,21 @@ onEvent('item.registry', event => {
 	event.create('kubejs:scarpiron').displayName('废铁')
 	event.create('kubejs:scarpiron_axe',"axe").displayName('废铁斧').tier("stone")
 	event.create('kubejs:rock').displayName('碎石')
+	event.create('kubejs:treebark_cup').displayName('树皮杯')
+	event.create('kubejs:treebark_cup_water').displayName('树皮杯（水）').maxStackSize(1).food(food =>{
+		food
+		.hunger(0)
+		.saturation(0)
+		.alwaysEdible()
+	})
+
+	event.create('kubejs:treebark_cup_purewater').displayName('树皮杯（净化水）').maxStackSize(1).food(food =>{
+		food
+		.hunger(0)
+		.saturation(0)
+		.alwaysEdible()
+	})
+
 	event.create("copper_splint").maxStackSize(64).displayName("铜夹板")//铜夹板
 	event.create("leather_sheet").maxStackSize(64).displayName("皮革布料")//皮革薄板
 	event.create("cooked_leather").maxStackSize(64).displayName("熟皮革")//熟皮革
@@ -64,3 +79,9 @@ onEvent('block.registry', event => {
 	// Register new blocks here
 	// event.create('example_block').material('wood').hardness(1.0).displayName('Example Block')
 })
+
+
+//大逃杀累了QWQ
+//再过一段时间再继续做吧
+//正好TAC出1182版本了
+//回头咱先搞迁移再说
