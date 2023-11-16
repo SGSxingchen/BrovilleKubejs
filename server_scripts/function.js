@@ -13,3 +13,7 @@ function getGradientColor(value) {
 
     return `#${redHex}${greenHex}00`; // 固定蓝色分量为0
 }
+
+function between(x,num1,num2) {//判断一个数是否在两个数之间的函数
+    return (x <= num1 && x>=num2)
+}
