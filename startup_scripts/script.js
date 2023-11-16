@@ -6,14 +6,13 @@ onEvent('item.registry', event => {
 	event.create('kubejs:enclosure_tool').displayName('圈地工具').maxStackSize(1)
 	event.create('kubejs:scarpiron').displayName('废铁')
 	event.create('kubejs:scarpiron_axe',"axe").displayName('废铁斧').tier("stone")
+	event.create('kubejs:rock').displayName('碎石')
 	event.create("copper_splint").maxStackSize(64).displayName("铜夹板")//铜夹板
-	event.create("steel_ingot").maxStackSize(64).displayName("钢锭")//钢锭
-	event.create("steel_sheet").maxStackSize(64).displayName("钢板")//钢板
-	event.create("steel_nugget").maxStackSize(64).displayName("钢粒")//钢粒
 	event.create("leather_sheet").maxStackSize(64).displayName("皮革布料")//皮革薄板
 	event.create("cooked_leather").maxStackSize(64).displayName("熟皮革")//熟皮革
 	event.create("diamond_plate").maxStackSize(64).displayName("钻石板")//钻石板
 	event.create("bone_ingot").maxStackSize(64).displayName("坚硬骨片")//坚硬骨片
+	event.create('kubejs:andesite_alloy_dust').displayName('安山合金混合物')
 	// 无线电系列
 	event.create("letsee").maxStackSize(1).displayName("无线电")// 无线电
 	event.create("letsee4").maxStackSize(1).displayName("无线电（电池耗尽）")// 空的无线电
@@ -47,7 +46,7 @@ onEvent('item.registry.armor_tiers', event => {
 		tier.knockbackResistance = 0.0
 	})
 })
-let armors = ['helmet', 'leggings', 'chestplate','boots']
+let armors = ['helmet', 'chestplate', 'leggings','boots']
 let armorsname = ["头盔","胸甲","护腿","靴子"]
 let tiers = ['treebark','bone']
 let tiersName = ["树皮",'骨制']
@@ -56,7 +55,7 @@ let tiersName = ["树皮",'骨制']
 onEvent('item.registry', event => {
 	for (const t in tiers) {
 		for (const a in armors) {
-			event.create(`kubejs:${tiers[t]}_${armors[a]}`,armors[a]).displayName(`${tiersName[t]}${armorsname[a]}`).tier(tiers[t])
+			event.create(`kubejs:${tiers[t]}_${armors[a]}`,armors[a]).displayName(`${tiersName[t]}${armorsname[a]}`).tier(tiers[t]).maxStackSize(1)
 		}
 	}
 })
