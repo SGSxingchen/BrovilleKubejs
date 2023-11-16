@@ -51,6 +51,7 @@ onEvent('block.left_click', event =>{
     }
 })//确定2点
 
+
 onEvent("command.registry", event => {//监听命令注册事件
     const{commands: Commands, arguments: Arguments} = event;
     event.register(// 注册新命令
@@ -76,11 +77,11 @@ onEvent("command.registry", event => {//监听命令注册事件
                 let enY2 = change(enclosureY1,enclosureY2)[1]
                 let enZ1 = change(enclosureZ1,enclosureZ2)[0]
                 let enZ2 = change(enclosureZ1,enclosureZ2)[1]//进行坐标排序
-    
+                enclosure.settedArea++;
                 let AreaNo = `Area${enclosure.settedArea}`
                 enclosure.AreaS[AreaNo] = {"Point1":[enX1,enY1,enZ1],"Point2":[enX2,enY2,enZ2],"name":name,"level":level,"text":text, "status":status}
                 JsonIO.write('kubejs/serverJson/enclosure.json',enclosure)//写入已有的区域
-                enclosure.settedArea++;
+                
             }
             return 0 
         }))))))
