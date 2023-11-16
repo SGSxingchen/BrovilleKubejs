@@ -320,6 +320,7 @@ onEvent('recipes', event =>{
 onEvent('recipes', event => {
     ////安山合金 工序
       event.shapeless('kubejs:andesite_alloy_dust', ['create:crushed_raw_iron', '2x minecraft:andesite','kubejs:rock'])//安山合金粉末
+      //烧制安山合金
       event.custom({
             "type": "minecraft:blasting",
             "ingredient": {
@@ -328,31 +329,76 @@ onEvent('recipes', event => {
             "result": "create:andesite_alloy",
             "experience": 0.20,
             "cookingtime": 500
-        })//烧制安山合金
+        })
+      //合成石磨
       event.shaped('create:millstone', ['BBB','NAN','SSS'], 
-        {S:'create:andesite_alloy',N:'minecraft:grindstone',A:'minecraft:hopper',B:'#minecraft:wooden_slabs'})//合成石磨
-        /////锌 工序
-      event.custom({"type": "create:sandpaper_polishing","ingredients": [{"item": "create:zinc_ingot"}],"results": [{"item": "create_sa:zinc_handle",}]})///锌手柄
-      event.shaped('create:hand_crank', ['SSA','  B'], 
-        {S:'create:andesite_alloy',A:'kubejs:fibers_rag',B:'create_sa:zinc_handle'})//合成手摇曲柄
-      event.shaped('immersiveengineering:hammer', ['SAS',' B ',' B '], 
-        {S:'create:andesite_alloy',A:'zombiekit:iron_wire',B:'create_sa:zinc_handle'})//合成铁锤
-      event.shaped('immersiveengineering:wirecutter', ['A A',' S ','B B'], 
-        {S:'create:andesite_alloy',A:'kubejs:scarpiron',B:'create_sa:zinc_handle'})//合成钳子
-        ////粗铜、粗锌和粗铅 工序
-      event.shapeless('kubejs:crushed_big_ore', ['9x minecraft:cobblestone'])//第一步提炼
-      event.custom({"type": "create:sandpaper_polishing","ingredients": [{"item": "kubejs:crushed_big_ore"}],"results": [{"item": "kubejs:crushed_middle_ore",}]})///第二步提炼
+        {S:'create:andesite_alloy',N:'minecraft:grindstone',A:'minecraft:hopper',B:'#minecraft:wooden_slabs'})
+      //锌手柄
       event.custom({
-            "type": "minecraft:blasting",
-            "ingredient": {
-              "item": "kubejs:crushed_middle_ore"
-            },
-            "result": "kubejs:crushed_small_ore",
-            "experience": 0.05,
-            "cookingtime": 1200
-        })//第三步提炼
-      event.custom()
-        ////粗镍 工序
+        "type": "create:sandpaper_polishing",
+        "ingredients": [
+          {
+            "item": "create:zinc_ingot"
+          }
+        ],
+        "results": [
+          {
+            "item": "create_sa:zinc_handle"
+          }
+        ]
+      })
+      //合成手摇曲柄
+      event.shaped('create:hand_crank', ['SSA','  B'], 
+        {S:'create:andesite_alloy',A:'kubejs:fibers_rag',B:'create_sa:zinc_handle'})
+      //合成铁锤
+      event.shaped('immersiveengineering:hammer', ['SAS',' B ',' B '], 
+        {S:'create:andesite_alloy',A:'zombiekit:iron_wire',B:'create_sa:zinc_handle'})
+      //合成钳子
+      event.shaped('immersiveengineering:wirecutter', ['A A',' S ','B B'], 
+        {S:'create:andesite_alloy',A:'kubejs:scarpiron',B:'create_sa:zinc_handle'})
+      
+      //粗铜、粗锌和粗铅 工序
+      //开始处理
+      event.shapeless('kubejs:crushed_big_ore', ['9x minecraft:cobblestone'])
+      //第一步提炼
+      event.custom({
+        "type": "create:sandpaper_polishing",
+        "ingredients": [
+          {
+            "item": "kubejs:crushed_big_ore"
+          }
+        ],
+        "results": [
+          {
+            "item": "kubejs:crushed_middle_ore"
+          }
+        ]
+      })
+      //第二步提炼
+      event.custom({
+        "type": "create:sandpaper_polishing",
+        "ingredients": [
+          {
+            "item": "kubejs:crushed_big_ore"
+          }
+        ],
+        "results": [
+          {
+            "item": "kubejs:crushed_middle_ore"
+          }
+        ]
+      })
+      //第三步提炼
+      event.custom({
+        "type": "minecraft:blasting",
+        "ingredient": {
+          "item": "kubejs:crushed_middle_ore"
+        },
+        "result": "kubejs:crushed_small_ore",
+        "experience": 0.05,
+        "cookingtime": 1200
+    })
+      //粗镍 工序
       event.custom({
         "type": "create:milling",
         "ingredients": [
@@ -371,7 +417,7 @@ onEvent('recipes', event => {
         ],
         "processingTime": 100
       })
-        ///辊压机 工序
+      //辊压机 工序
       event.shaped('create:mechanical_press', ['CDC','BAB','SSS'], 
         {S:'minecraft:iron_block',A:'create:shaft',B:'create:cogwheel',C:'create:andesite_casing',D:'minecraft:copper_block'})//合成辊压机
       event.shaped('create:shaft', ['S','S'], {S:'create:andesite_alloy'})//合成传动杆
@@ -394,4 +440,33 @@ onEvent('recipes', event => {
       event.shapeless('create:cogwheel', ['#minecraft:planks','create:shaft','kubejs:scarpiron'])//合成齿轮
       //合成砂纸
       event.shapeless('create:sand_paper', ['2x minecraft:paper','minecraft:sand'])
+
+      //烧矿镍 铅 锌
+      event.custom({
+        "type": "minecraft:blasting",
+        "ingredient": {
+          "item": 'immersiveengineering:raw_nickel'
+        },
+        "result": 'immersiveengineering:ingot_nickel',
+        "experience": 1,
+        "cookingtime": 600
+      })
+      event.custom({
+        "type": "minecraft:blasting",
+        "ingredient": {
+          "item": 'immersiveengineering:raw_lead'
+        },
+        "result": 'immersiveengineering:ingot_lead',
+        "experience": 1,
+        "cookingtime": 600
+      })
+      event.custom({
+        "type": "minecraft:blasting",
+        "ingredient": {
+          "item": 'create:raw_zinc'
+        },
+        "result": 'create:zinc_ingot',
+        "experience": 1,
+        "cookingtime": 600
+      })
 })
