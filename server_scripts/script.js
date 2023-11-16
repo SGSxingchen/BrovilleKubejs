@@ -11,6 +11,11 @@ onEvent('block.right_click', event =>{
         event.player.addItemCooldown(event.item,40)
         event.player.damageHeldItem(MAIN_HAND,20)
     }
+    if(event.block=='minecraft:campfire' && event.item =='minecraft:clay_ball' && event.item.count>=8){
+        event.block.set('minecraft:furnace')
+        event.player.playSound('minecraft:block.stone.break')
+        event.item.count = event.item.count-8
+    }
 })
 
 onEvent('lootjs',(event) =>{
