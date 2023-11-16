@@ -6,7 +6,7 @@ settings.logErroringRecipes = true
 var tiers = ['wooden','stone']
 var tools = ['sword',"shovel",'pickaxe','axe','hoe']
 var banItem = ['zombiekit:nitrocellulose', 'zombiekit:cloth','minecraft:enchanting_table','hardcore_torches:lit_torch']
-var banMod = ['zombie_extreme']
+var banMod = []
 
 onEvent('item.tags',event =>{
     event.add('forge:tools/axes','kubejs:scarpiron_axe')
