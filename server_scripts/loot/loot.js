@@ -13,7 +13,7 @@ onEvent("lootjs", (event) => {
         event
         .addEntityLootModifier(mob)
         .randomChance(0.1) // 10% 概率
-        .thenAdd("kubejs:scarpiron");
+        .addLoot("kubejs:scarpiron");
     }
     
 });
