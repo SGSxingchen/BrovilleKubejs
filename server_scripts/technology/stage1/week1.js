@@ -56,6 +56,21 @@ onEvent('recipes', event => {
           "item":"immersiveengineering:light_bulb","count":3
       }
     })
+    //合成电灯
+    event.shaped(
+      "immersiveengineering:electric_lantern",
+      [
+        " I ",
+        "PEP",
+        " W "
+      ], 
+      {
+        I:'#forge:plates/iron',
+        E:'immersiveengineering:light_bulb',
+        P:'#forge:glass_panes',
+        W:'#forge:wires/copper'
+      }
+    )
     //合成园艺玻璃罩
     event.custom({
       "type": "minecraft:crafting_shaped",
