@@ -87,7 +87,7 @@ onEvent('recipes', event => {
           "tag": "forge:treated_wood"
         },
         "e": {
-          "item": "immersiveengineering:light_bulb"
+          "item": "immersiveengineering:electric_lantern"
         },
         "c": {
           "item": "immersiveengineering:component_iron"
