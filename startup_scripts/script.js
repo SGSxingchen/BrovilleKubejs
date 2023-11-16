@@ -23,10 +23,14 @@ onEvent('item.registry', event => {
 	})
 
 	event.create("copper_splint").maxStackSize(64).displayName("铜夹板")//铜夹板
+	event.create("steel_ingot").maxStackSize(64).displayName("钢锭")//钢锭
+	event.create("steel_sheet").maxStackSize(64).displayName("钢板")//钢板
+	event.create("steel_nugget").maxStackSize(64).displayName("钢粒")//钢粒
 	event.create("leather_sheet").maxStackSize(64).displayName("皮革布料")//皮革薄板
 	event.create("cooked_leather").maxStackSize(64).displayName("熟皮革")//熟皮革
 	event.create("diamond_plate").maxStackSize(64).displayName("钻石板")//钻石板
 	event.create("bone_ingot").maxStackSize(64).displayName("坚硬骨片")//坚硬骨片
+	event.create("string_rag").maxStackSize(64).displayName("丝线布")
 	event.create('kubejs:andesite_alloy_dust').displayName('安山合金混合物')
 	// 无线电系列
 	event.create("letsee").maxStackSize(1).displayName("无线电")// 无线电
@@ -36,6 +40,10 @@ onEvent('item.registry', event => {
 	//食物
 	event.create('treated_flesh').displayName("带骨肉").maxStackSize(64).food(food => {food.hunger(2).saturation(0.25)})// 带骨肉
 	event.create('treated_cooked_flesh').displayName("熟带骨肉").maxStackSize(64).food(food => {food.hunger(4).saturation(0.25)})// 熟的带骨肉
+	//投掷物
+	event.create("fire_bottle").maxStackSize(16).displayName("燃烧瓶")// 燃烧瓶
+	//玩Apex玩的
+	event.create("resistance").maxStackSize(1).displayName("护盾电池")// 护盾电池
 })
 
 
