@@ -300,6 +300,21 @@ onEvent('recipes', event => {
         "item": "immersiveengineering:plate_copper"
       }
     })
+    //合成铁板
+    event.custom({
+      "type": "minecraft:crafting_shapeless",
+      "ingredients": [
+        {
+          "tag": "forge:ingots/iron"
+        },
+        {
+          "item": "immersiveengineering:hammer"
+        }
+      ],
+      "result": {
+        "item": "immersiveengineering:plate_iron"
+      }
+    })
   }
       //安山合金 工序
       event.shapeless('kubejs:andesite_alloy_dust', ['create:crushed_raw_iron', '2x minecraft:andesite','kubejs:rock'])//安山合金粉末
