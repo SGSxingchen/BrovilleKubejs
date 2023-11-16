@@ -1,4 +1,5 @@
-onEvent('recipes', event =>{
+onEvent('recipes', event => {
+  {
     //废铁变粉碎铁
     event.custom({
 		"type": "farmersdelight:cutting",
@@ -54,7 +55,7 @@ onEvent('recipes', event =>{
       "result":{
           "item":"immersiveengineering:light_bulb","count":3
       }
-  })
+    })
     //合成园艺玻璃罩
     event.custom({
       "type": "minecraft:crafting_shaped",
@@ -82,25 +83,18 @@ onEvent('recipes', event =>{
       }
     })
     //合成机械零件
-    event.custom({
-      "type": "minecraft:crafting_shaped",
-      "pattern": [
-        "i i",
-        "c ",
-        "i i"
-      ],
-      "key": {
-        "i": {
-          "tag": "forge:plates/iron"
-        },
-        "c": {
-          "tag": "forge:ingots/copper"
-        }
-      },
-      "result": {
-        "item": "immersiveengineering:component_iron"
+    event.shaped(
+      "immersiveengineering:component_iron",
+      [
+        "S S",
+        " A ",
+        "S S"
+      ], 
+      {
+        S:'#forge:plates/iron',
+        A:'#forge:ingots/copper'
       }
-    })
+    )
     //合成铁板
     event.custom({
       "type": "create:pressing",
@@ -196,46 +190,30 @@ onEvent('recipes', event =>{
       }
     })
     //合成低压接线器
-    event.custom({
-      "type": "minecraft:crafting_shaped",
-      "pattern": [
-        "i ",
-        "cic",
-        "cic"
-      ],
-      "key": {
-        "i": {
-          "tag": "forge:ingots/copper"
-        },
-        "c": {
-          "tag": "immersiveengineering:connector_insulator"
-        }
-      },
-      "result": {
-        "item": "immersiveengineering:connector_lv",
-        "count": 4
+    event.shaped(
+      "4x immersiveengineering:connector_lv",
+      [
+        " A ",
+        "SAS",
+        "SAS"
+      ], 
+      {
+        S:'#immersiveengineering:connector_insulator',
+        A:'#forge:ingots/copper'
       }
-    })
+    )
     //合成低压继电器
-    event.custom({
-      "type": "minecraft:crafting_shaped",
-      "pattern": [
-        "i ",
-        "cic"
-      ],
-      "key": {
-        "i": {
-          "tag": "forge:ingots/copper"
-        },
-        "c": {
-          "tag": "immersiveengineering:connector_insulator"
-        }
-      },
-      "result": {
-        "item": "immersiveengineering:connector_lv_relay",
-        "count": 8
+    event.shaped(
+      "4x immersiveengineering:connector_lv_relay",
+      [
+        " A ",
+        "SAS"
+      ], 
+      {
+        S:'#immersiveengineering:connector_insulator',
+        A:'#forge:ingots/copper'
       }
-    })
+    )
     //合成低压蓄电池
     event.custom({
       "type": "minecraft:crafting_shaped",
@@ -265,26 +243,18 @@ onEvent('recipes', event =>{
       }
     })
     //合成低压线圈
-    event.custom({
-      "type": "minecraft:crafting_shaped",
-      "pattern": [
-        "w ",
-        "wsw",
-        "w "
-      ],
-      "key": {
-        "w": {
-          "tag": "forge:wires/copper"
-        },
-        "s": {
-          "tag": "forge:rods/wooden"
-        }
-      },
-      "result": {
-        "item": "immersiveengineering:wirecoil_copper",
-        "count": 4
+    event.shaped(
+      "4x immersiveengineering:wirecoil_copper",
+      [
+        " S ",
+        "SAS",
+        " S "
+      ], 
+      {
+        S:'#forge:wires/copper',
+        A:'#forge:rods/wooden'
       }
-    })
+    )
     //合成铜线
     event.custom({
       "type": "minecraft:crafting_shapeless",
@@ -315,10 +285,8 @@ onEvent('recipes', event =>{
         "item": "immersiveengineering:plate_copper"
       }
     })
-    
-})
-onEvent('recipes', event => {
-    ////安山合金 工序
+  }
+      //安山合金 工序
       event.shapeless('kubejs:andesite_alloy_dust', ['create:crushed_raw_iron', '2x minecraft:andesite','kubejs:rock'])//安山合金粉末
       //烧制安山合金
       event.custom({
