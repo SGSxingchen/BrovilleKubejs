@@ -9,6 +9,20 @@ onEvent("item.right_click",event =>{
         //服务器发送消息
         event.player.tell("§a当前的位置为 §ex: " + Math.floor(event.player.x) + " §cy: " + Math.floor(event.player.y) + " §bz: " + Math.floor(event.player.z))
     }
+    if (event.item.id == 'kubejs:fire_bottle') {
+        if(event.player.offHandItem.id == "minecraft:flint_and_steel"){
+        //给予一个燃料瓶
+        event.player.giveInHand('zombiekit:molotov_cocktail')
+        //减少这个物品
+        event.item.count--;
+        }
+    }
+    if (event.item.id == 'kubejs:resistance') {
+        //获得伤害吸收
+        event.server.runCommandSilent(`effect give ${event.player.name} minecraft:absorption 60 4 false`)
+        //减少这个物品
+        event.item.count--;
+    }
 })
 
 onEvent('recipes', event => {
