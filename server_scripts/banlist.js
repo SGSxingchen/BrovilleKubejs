@@ -7,7 +7,8 @@ onEvent('recipes', event => {
 		event.remove({ mod: 'zombie_extreme' })
 		event.remove({ mod: 'zombiekit' })
 		event.remove({ mod: 'create_sa' })
-		event.remove({ mod: 'cgm' })
+		// event.remove({ mod: 'create' })
+		// event.remove({ mod: 'immersiveengineering' })
 		event.remove({ mod: 'additionalguns' })
     }
     ///删除物品配方

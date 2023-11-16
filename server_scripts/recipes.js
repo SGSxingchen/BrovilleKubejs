@@ -139,4 +139,36 @@ onEvent('recipes', event =>{
         A:'create:andesite_alloy',
         P:'minecraft:oak_planks'
     })
+    //废铁变粉碎铁
+    event.custom({
+		"type": "farmersdelight:cutting",
+		"ingredients": [
+		  {
+			"item":'kubejs:scarpiron'
+		  }
+		],
+		"tool": {
+		  "tag": 'forge:tools/axes',
+		},
+		"result": [
+		  {
+			"item": 'create:crushed_raw_iron',
+			"count":1
+		  }]
+	})
+    //碎铁合成铁粉
+    event.shapeless('kubejs:andesite_alloy_dust',['2x create:crushed_raw_iron'])
+    // 铁粉烧铁锭
+    event.smelting('minecraft:iron_ingot', 'kubejs:andesite_alloy_dust')
+    // 合成安山合金混合物
+    event.shaped('kubejs:andesite_alloy_dust',[
+        "IP",
+        "PA"
+    ],{
+        I:'kubejs:rock',
+        A:'create:crushed_raw_iron',
+        P:'minecraft:andesite'
+    })
+    // 烧安山合金
+    event.smelting('create:andesite_alloy', 'kubejs:andesite_alloy_dust')
 })
