@@ -32,6 +32,9 @@ onEvent('item.registry', event => {
 	event.create("bone_ingot").maxStackSize(64).displayName("坚硬骨片")//坚硬骨片
 	event.create("string_rag").maxStackSize(64).displayName("丝线布")
 	event.create("fibers_rag").maxStackSize(64).displayName("纤维布")//纤维布
+	event.create("crushed_big_ore").maxStackSize(64).displayName("杂质很多的圆石")
+	event.create("crushed_middle_ore").maxStackSize(64).displayName("杂志较少的圆石")
+	event.create("crushed_small_ore").maxStackSize(64).displayName("提炼后的圆石")
 	event.create('kubejs:andesite_alloy_dust').displayName('安山合金混合物')
 	// 无线电系列
 	event.create("letsee").maxStackSize(1).displayName("无线电")// 无线电
