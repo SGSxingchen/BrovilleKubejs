@@ -3,8 +3,15 @@ settings.logRemovedRecipes = true
 settings.logSkippedRecipes = false
 settings.logErroringRecipes = true
 
-var tiers = ['wood','stone']
+var tiers = ['wooden','stone']
 var tools = ['sword',"shovel",'pickaxe','axe','hoe']
+
+onEvent('item.tags',event =>{
+    event.add('forge:tools/axes','kubejs:scarpiron_axe')
+})
+
+
+
 onEvent('recipes', event =>{
     event.remove({output:'zombiekit:fibre'})
 
@@ -21,11 +28,6 @@ onEvent('recipes', event =>{
         F:'zombiekit:fibre',
         S:'#forge:rods/wooden'
     })
-
-
-
-
-
 
     event.shapeless('zombiekit:fibre', ['3x farmersdelight:straw'])
 
@@ -50,5 +52,52 @@ onEvent('recipes', event =>{
     
     event.replaceInput({output:'hardcore_torches:fire_starter'},'minecraft:string','farmersdelight:straw')
 
+    event.custom({
+		"type": "farmersdelight:cutting",
+		"ingredients": [
+		  {
+			"item":'kubejs:scarpiron'
+		  }
+		],
+		"tool": {
+		  "tag": 'forge:tools/axes',
+		},
+		"result": [
+		  {
+			"item": 'create:crushed_raw_iron',
+			"count":1
+		  }]
+	})
+    event.custom({
+        "type": "create:item_application",
+        "ingredients": [
+            {
+                "tag": "forge:stripped_logs"
+            },
+            {
+                "tag": 'forge:tools/axes'
+            }
+        ],
+        "results": [
+            {
+                "item": 'farmersdelight:cutting_board'
+            }
+        ]
+    })
+    event.custom({
+		"type": "farmersdelight:cutting",
+		"ingredients": [
+		  {
+			"item":'minecraft:flint'
+		  }
+		],
+		"tool": {
+		  "tag": 'forge:tools/axes',
+		},
+		"result": [
+		  {
+			"item": 'kubejs:rock',
+			"count":1
+		  }]
+	})
 })
-
