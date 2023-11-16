@@ -192,7 +192,7 @@ onEvent("server.tick", event =>{
 })//同步
 
 onEvent("player.tick",event =>{
-    for (let i = 1; i <= Area.settedArea; i++) {
+    for (let i = 0; i < Area.settedArea; i++) {
         if (inArea(event.player, Area.AreaS[`Area${i}`]) && !event.player.stages.has(`inArea${i}`))
         {
             event.player.stages.add(`inArea${i}`)
