@@ -1,5 +1,5 @@
 {
-	"settedArea": 2,
+	"settedArea": 3,
 	"AreaS": {
 		"Area0": {
 			"Point1": [
@@ -32,6 +32,22 @@
 			"level": 1.2,
 			"text": "轻度感染区",
 			"isOpen": true
+		},
+		"Area2": {
+			"Point1": [
+				-1647,
+				21,
+				1297
+			],
+			"Point2": [
+				-1651,
+				21,
+				1294
+			],
+			"name": "测试区域3",
+			"level": 1.0,
+			"text": "测试23",
+			"status": false
 		}
 	}
 }
