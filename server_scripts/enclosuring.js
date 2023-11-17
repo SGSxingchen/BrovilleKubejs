@@ -1,10 +1,10 @@
 //code by Yakumo_UUZ
-var enclosureX1
-var enclosureY1
-var enclosureZ1
-var enclosureX2
-var enclosureY2
-var enclosureZ2
+var enclosureX1 = ""
+var enclosureY1 = ""
+var enclosureZ1 = ""
+var enclosureX2 = ""
+var enclosureY2 = ""
+var enclosureZ2 = ""
 var enclosure
 enclosure = JsonIO.read('kubejs/serverJson/enclosure.json')//读取文件
 
@@ -80,7 +80,7 @@ onEvent("command.registry", event => {//监听命令注册事件
                 let enZ1 = change(enclosureZ1,enclosureZ2)[0]
                 let enZ2 = change(enclosureZ1,enclosureZ2)[1]//进行坐标排序
                 let AreaNo = `Area${enclosure.settedArea}`
-                
+                console.info(`${enX1},${enclosureX1},${enclosureX2}`)
                 enclosure.AreaS[AreaNo] = {"Point1":[enX1,enY1,enZ1],"Point2":[enX2,enY2,enZ2],"name":name,"level":level,"text":text, "status":status}
                 enclosure.settedArea++;
                 JsonIO.write('kubejs/serverJson/enclosure.json',enclosure)//写入已有的区域

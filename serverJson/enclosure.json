@@ -1,5 +1,5 @@
 {
-	"settedArea": 4,
+	"settedArea": 3,
 	"AreaS": {
 		"Area0": {
 			"Point1": [
@@ -48,22 +48,6 @@
 			"level": 1.0,
 			"text": "测试23",
 			"status": false
-		},
-		"Area3": {
-			"Point1": [
-				-1577,
-				-56,
-				1585
-			],
-			"Point2": [
-				-1581,
-				-61,
-				1581
-			],
-			"name": "1",
-			"level": 1.0,
-			"text": "1",
-			"status": true
 		}
 	}
 }
