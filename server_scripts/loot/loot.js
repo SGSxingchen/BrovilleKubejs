@@ -1,19 +1,28 @@
 var ETypeMob = [
     "zombie_extreme:infected",
     "zombie_extreme:crawler",
-    "zombie_extreme:runner",
-    "rottencreatures:frostbitten",
     "minecraft:zombie",
-    "minecraft:husk",
-    "zombie_extreme:infected_police"
+    "minecraft:husk"
   ]
+var DTypeMob = [
+    "zombie_extreme:infected_police",
+    "zombie_extreme:runner",
+    "rottencreatures:frostbitten"
+]
 //怪物掉铁
 onEvent("lootjs", (event) => {
     for(var mob in ETypeMob){
         event
         .addEntityLootModifier(mob)
+        .randomChance(0.05) // 5% 概率
+        .addLoot("kubejs:scarpiron");
+    }
+});
+onEvent("lootjs", (event) => {
+    for(var mob in DTypeMob){
+        event
+        .addEntityLootModifier(mob)
         .randomChance(0.1) // 10% 概率
         .addLoot("kubejs:scarpiron");
     }
-    
 });
