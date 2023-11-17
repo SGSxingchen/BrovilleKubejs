@@ -9,7 +9,7 @@ function inArea(p,a) {//判断玩家是否在区域内的函数，二维
     return (
         between(p.x, a.Point1[0], a.Point2[0]) &&
         between(p.z, a.Point1[2], a.Point2[2])
-        && between(p.y, a.Point1[1], a.Point2[1])
+        //&& between(p.y, a.Point1[1], a.Point2[1])
     )
 }
 
@@ -21,6 +21,13 @@ function inArea3D(p,a) {//判断玩家是否在区域内的函数，三维
     )
 }
 
+function inAreasOfName(e,name){
+    for (let i = 0; i < Area.settedArea; i++) {
+        if (Area.AreaS[`Area${i}`].name.includes(name)){
+            return inArea3D(e, Area.AreaS[`Area${i}`])
+        }
+    }
+}
 function deviation(x,p1,p2,d) {//偏移函数
     let midp = (p1+p2)/2
     if (x<midp) {
@@ -173,7 +180,7 @@ onEvent("server.tick", event =>{
 
 onEvent("player.tick",event =>{
     for (let i = 0; i < Area.settedArea; i++) {
-        if (inArea(event.player, Area.AreaS[`Area${i}`]) && !event.player.stages.has(`inArea${i}`))
+        if (inArea3D(event.player, Area.AreaS[`Area${i}`]) && !event.player.stages.has(`inArea${i}`))
         {
             event.player.stages.add(`inArea${i}`)
             SendAreaJoinInfo(event,i)
@@ -189,9 +196,7 @@ onEvent("player.tick",event =>{
                         callback.reschedule(1 * SECOND)
                         SendAreaIllegleInfo(event)
                     }else{
-                        if (inArea(event.player, Area.AreaS[`Area${inow}`])) {
-
-                            
+                        if (inArea3D(event.player, Area.AreaS[`Area${inow}`])) {
 
                             event.player.setPosition(
                                 deviation(x, Area.AreaS[`Area${inow}`].Point1[0], Area.AreaS[`Area${inow}`].Point2[0], 5), 
@@ -207,7 +212,7 @@ onEvent("player.tick",event =>{
             }
         }//玩家进入区域时触发
 
-        if (!inArea(event.player, Area.AreaS[`Area${i}`]) && event.player.stages.has(`inArea${i}`))
+        if (!inArea3D(event.player, Area.AreaS[`Area${i}`]) && event.player.stages.has(`inArea${i}`))
         {
             event.player.stages.remove(`inArea${i}`)
             SendAreaLeaveInfo(event,i)
@@ -215,5 +220,39 @@ onEvent("player.tick",event =>{
         }//玩家离开区域时触发
     }
 })
-
-//就是界面上显示文字……实在有点看不清，但先不管了
+var BlackList = [
+    "bat"
+]
+var AreaBlackList = [
+    {
+        "name":"出生点",
+        "mob": [
+            "zombie_extreme:infected",
+            "zombie_extreme:crawler",
+            "zombie_extreme:runner",
+            "rottencreatures:frostbitten",
+            "minecraft:zombie",
+            "minecraft:husk",
+            "zombie_extreme:infected_police"
+        ]
+    }
+]
+onEvent("entity.spawned",event=>{
+    var entity = event.entity;
+    var type = entity.getType();
+    for(var blacklist of BlackList){
+        if(type.includes(blacklist)){
+            event.cancel()
+        }
+    }
+})
+onEvent("entity.spawned",event=>{
+    var entity = event.entity;
+    var type = entity.getType();
+    const onlinePlayers = Utils.server.players;
+    for(var areaBlackList of AreaBlackList){
+        if(inAreasOfName(entity,areaBlackList.name) && areaBlackList.mob.indexOf(type)){
+            event.cancel()
+        }
+    }
+})
