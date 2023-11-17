@@ -9,7 +9,7 @@ function inArea(p,a) {//判断玩家是否在区域内的函数，二维
     return (
         between(p.x, a.Point1[0], a.Point2[0]) &&
         between(p.z, a.Point1[2], a.Point2[2])
-        // && between(p.y, a.Point1[1], a.Point2[1])
+        && between(p.y, a.Point1[1], a.Point2[1])
     )
 }
 
