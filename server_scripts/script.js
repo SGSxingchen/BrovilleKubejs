@@ -3,7 +3,7 @@ settings.logRemovedRecipes = true
 settings.logSkippedRecipes = false
 settings.logErroringRecipes = true
 
-
+//去皮原木小刀切篝火
 onEvent('block.right_click', event =>{
     if(event.block.item.hasTag('forge:stripped_log') && (event.item.hasTag('forge:tools/knives'))){
         event.block.set('minecraft:campfire',{lit:"false"})
@@ -29,19 +29,19 @@ onEvent('lootjs',(event) =>{
     .randomChance(0.3)
     .addLoot(Item.of('farmersdelight:straw'));
     
-    var touch = ['hardcore_torches:lit_torch', 'hardcore_torches:smoldering_torch', 'hardcore_torches:unlit_torch']
+    var touch = ['minecraft:torch','hardcore_torches:lit_torch', 'hardcore_torches:smoldering_torch', 'hardcore_torches:unlit_torch']
     for (const i in touch) {
         event.addBlockLootModifier(touch[i]).replaceLoot('minecraft:stick',touch[i])
     }
     
 })
-
+//喝水
 onEvent('item.food_eaten', event => {
     if ((event.item.id == 'kubejs:treebark_cup_purewater')||(event.item.id == 'kubejs:treebark_cup_water')) {
         event.player.giveInHand('kubejs:treebark_cup')
     }
 })
-
+//装水
 onEvent('item.right_click', event => {
     let player = event.player
     if (player.getHeldItem(event.hand) == 'kubejs:treebark_cup') {

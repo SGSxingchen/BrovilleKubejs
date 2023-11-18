@@ -9,6 +9,9 @@ var enclosure
 enclosure = JsonIO.read('kubejs/serverJson/enclosure.json')//读取文件
 
 function change(x1,x2) {
+    console.info(`${x1},${x2}`)
+    x1 = parseInt(x1)
+    x2 = parseInt(x2)
     if (x1 < x2) {        
         let a = x2
         x2 = x1
@@ -31,7 +34,7 @@ onEvent('block.right_click', event =>{
         }
         enclosureX1 = enX
         enclosureY1 = enY
-        enclosureZ1 = enZ
+        enclosureZ1 = enZ  
     }
 })//确定1点
 onEvent('block.left_click', event =>{

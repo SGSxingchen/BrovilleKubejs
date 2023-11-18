@@ -16,6 +16,10 @@ onEvent("lootjs", (event) => {
         .addEntityLootModifier(mob)
         .randomChance(0.05) // 5% 概率
         .addLoot("kubejs:scarpiron");
+        event
+        .addEntityLootModifier(mob)
+        .randomChance(0.05) // 5% 概率
+        .addLoot('minecraft:leather');
     }
 });
 onEvent("lootjs", (event) => {
@@ -24,5 +28,9 @@ onEvent("lootjs", (event) => {
         .addEntityLootModifier(mob)
         .randomChance(0.1) // 10% 概率
         .addLoot("kubejs:scarpiron");
+        event
+        .addEntityLootModifier(mob)
+        .randomChance(0.1) // 5% 概率
+        .addLoot('minecraft:leather');
     }
 });

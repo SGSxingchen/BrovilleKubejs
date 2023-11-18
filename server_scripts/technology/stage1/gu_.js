@@ -5,15 +5,12 @@ onEvent('recipes', event => {
     event.remove({output:'minecraft:bone_meal'})
     //骨块
     event.remove({output:'minecraft:bone_block'})
+    //移除熔炉
+    event.remove({output:'minecraft:furnace'})
+    //移除篝火
+    event.remove({output:'minecraft:campfire'})
     //合成骨块
     event.shapeless('minecraft:bone_block', ['minecraft:flint','2x minecraft:bone','kubejs:string_rag'])
-    //磨出骨块
-    event.custom({
-        "type": "create:milling",
-        "ingredients": [{"item": "minecraft:bone","count": 7}],
-            "results": [{"item": "minecraft:bone_block"}],
-            "processingTime": 100
-        })
     //切成骨片
     event.custom({
             "type": "farmersdelight:cutting",
@@ -25,6 +22,13 @@ onEvent('recipes', event => {
                 {"item": "minecraft:bone_meal","chance": 0.4},
             ]
             })
+    //磨出丝线
+    event.custom({
+        "type": "create:milling",
+        "ingredients": [{"item": "farmersdelight:tree_bark"}],
+            "results": [{"item": "minecraft:string"}],
+            "processingTime": 100
+        })
     //合成绷带
     event.shapeless('zombie_extreme:bandage', ['4x kubejs:string_rag'])
     //最终提取

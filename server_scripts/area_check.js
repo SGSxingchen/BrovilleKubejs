@@ -1,23 +1,23 @@
-//code by Yakumo_UUZ
+//code by LanStarD
 
 var Area
 Area = JsonIO.read('kubejs/serverJson/enclosure.json')//读取文件
-
-
-
 function inArea(p,a) {//判断玩家是否在区域内的函数，二维
     return (
-        between(p.x, a.Point1[0], a.Point2[0]) &&
-        between(p.z, a.Point1[2], a.Point2[2])
+        between(Math.floor(p.x), a.Point1[0], a.Point2[0]) &&
+        between(Math.floor(p.z), a.Point1[2], a.Point2[2])
         //&& between(p.y, a.Point1[1], a.Point2[1])
     )
 }
 
 function inArea3D(p,a) {//判断玩家是否在区域内的函数，三维
+    // Utils.server.tell(`${p.x},${a.Point1[0]},${a.Point2[0]}`)
+    // Utils.server.tell(`${p.y},${a.Point1[1]},${a.Point2[1]}`)
+    // Utils.server.tell(`${Math.floor(p.z)},${a.Point1[2]},${a.Point2[2]}`)
     return (
-        between(p.x, a.Point1[0], a.Point2[0]) &&
-        between(p.y, a.Point1[1], a.Point2[1]) &&
-        between(p.z, a.Point1[2], a.Point2[2])
+        between(Math.floor(p.x), a.Point1[0], a.Point2[0]) &&
+        between(Math.floor(p.y), a.Point1[1], a.Point2[1]) &&
+        between(Math.floor(p.z), a.Point1[2], a.Point2[2])
     )
 }
 
@@ -28,12 +28,30 @@ function inAreasOfName(e,name){
         }
     }
 }
-function deviation(x,p1,p2,d) {//偏移函数
-    let midp = (p1+p2)/2
-    if (x<midp) {
-        return x-d
-    }else if (x >= midp){
-        return x+d
+function deviation(x,z,area,d) {
+    var x1 = area.Point1[0]
+    var x2 = area.Point2[0]
+    var z1 = area.Point1[2]
+    var z2 = area.Point2[2]
+    
+    var midX = ( x1 + x2 ) / 2
+    var midZ = ( z1 + z2 ) / 2
+
+    if( x - x1 < z - z1 ){
+        if( z < midZ ){
+            return [x + 0.5, z - d]
+        }
+        else{
+            return [x + 0.5, z + d]
+        }
+    }
+    else{
+        if( x < midX ){
+            return [x - d, z + 0.5]
+        }
+        else{
+            return [x + d, z + 0.5]
+        }
     }
 }
 
@@ -65,7 +83,7 @@ function SendAreaIllegleInfo(e){//发送进入违法区域的信息
         },
         area_info_3: {
             type: 'text',
-            text: `§l请在${time}秒内返回开放区域`,
+            text: `§l${time}秒后遣返`,
             x: 0,
             y: 60,
             alignX: 'center',
@@ -95,7 +113,7 @@ function SendAreaJoinInfo(e,i){//发送进入区域的信息
         },
         area_info_2: {
             type: 'text',
-            text: `§lLevel:${level}`,
+            text: `§lLevel:${Math.floor(level * 10) / 10}`,
             x: 0,
             y: 40,
             alignX: 'center',
@@ -117,7 +135,7 @@ function SendAreaJoinInfo(e,i){//发送进入区域的信息
         }
     });
     
-    e.server.schedule(2 * SECOND, e.server,() => {
+    e.server.schedule(3 * SECOND, e.server,() => {
         if(!e.player.stages.has("illegleTime")){
             e.player.paint({'area_info_1': {remove: true}});
             e.player.paint({'area_info_2': {remove: true}});
@@ -144,7 +162,7 @@ function SendAreaLeaveInfo(e,i){
         },
         area_info_2: {
             type: 'text',
-            text: `§lLevel:${level}`,
+            text: `§lLevel:${Math.floor(level * 10) / 10}`,
             x: 0,
             y: 40,
             alignX: 'center',
@@ -165,7 +183,7 @@ function SendAreaLeaveInfo(e,i){
             draw: 'always'
         }
     });
-    e.server.schedule(2 * SECOND, e.server,() => {
+    e.server.schedule(3 * SECOND, e.server,() => {
         if(!e.player.stages.has("illegleTime")){
             e.player.paint({'area_info_1': {remove: true}});
             e.player.paint({'area_info_2': {remove: true}});
@@ -176,53 +194,78 @@ function SendAreaLeaveInfo(e,i){
 
 onEvent("server.tick", event =>{
     Area = enclosure
-})//同步
+})
 
 onEvent("player.tick",event =>{
     for (let i = 0; i < Area.settedArea; i++) {
+        // Utils.server.tell(`${inArea3D(event.player, Area.AreaS[`Area${i}`])}`)
+        // 隐藏区域返回
+        if(Area.AreaS[`Area${i}`].name.includes("隐藏")){
+            return
+        }
         if (inArea3D(event.player, Area.AreaS[`Area${i}`]) && !event.player.stages.has(`inArea${i}`))
         {
             event.player.stages.add(`inArea${i}`)
             SendAreaJoinInfo(event,i)
+            //event.player.tell(`你现在进入了`+Area.AreaS[`Area${i}`].name)
             if(!Area.AreaS[`Area${i}`].status&& !event.player.stages.has("OP")){//检测玩家是否进入了未开放区域，且不是OP
-                event.player.tell('当前区域未开放，3秒后遣返')
+                event.player.tell('当前区域未开放')
                 let x = event.player.x
                 let z = event.player.z
-                let inow = i
-                event.player.persistentData.outLineTimer = 4
-                event.server.schedule(1 * SECOND, event.server, function (callback) {
-                    event.player.persistentData.outLineTimer--;
-                    if(event.player.persistentData.outLineTimer > 0){
-                        callback.reschedule(1 * SECOND)
-                        SendAreaIllegleInfo(event)
-                    }else{
-                        if (inArea3D(event.player, Area.AreaS[`Area${inow}`])) {
-
-                            event.player.setPosition(
-                                deviation(x, Area.AreaS[`Area${inow}`].Point1[0], Area.AreaS[`Area${inow}`].Point2[0], 5), 
-                                event.player.y, 
-                                deviation(z, Area.AreaS[`Area${inow}`].Point1[2], Area.AreaS[`Area${inow}`].Point2[2], 5)
-                                )//执行遣返的部分
-                            event.player.tell("已遣返")
-                        }
-                    }
-                    
-
-                })
+                var deviations = deviation(x - 0.5,z - 0.5, Area.AreaS[`Area${i}`], 1)
+                // Utils.server.tell(`${x-0.5},${Area.AreaS[`Area${inow}`].Point1[0]},${Area.AreaS[`Area${inow}`].Point2[0]},${deviation(x-0.5, Area.AreaS[`Area${inow}`].Point1[0], Area.AreaS[`Area${inow}`].Point2[0], 5)}`)
+                Utils.server.runCommandSilent(`tp ${event.player} ${deviations[0]} ${event.player.y} ${deviations[1]}`)
             }
         }//玩家进入区域时触发
-
-        if (!inArea3D(event.player, Area.AreaS[`Area${i}`]) && event.player.stages.has(`inArea${i}`))
+        else if (!inArea3D(event.player, Area.AreaS[`Area${i}`]) && event.player.stages.has(`inArea${i}`))
         {
             event.player.stages.remove(`inArea${i}`)
             SendAreaLeaveInfo(event,i)
-            event.player.tell(`你现在离开了`+Area.AreaS[`Area${i}`].name)
-        }//玩家离开区域时触发
+            //event.player.tell(`你现在离开了`+Area.AreaS[`Area${i}`].name)
+        }
     }
 })
+//全局黑名单
 var BlackList = [
-    "bat"
+    {
+        "type":"name",
+        "name":"bat"
+    },
+    {
+        "type":"name",
+        "name":"creeper"
+    },
+    {
+        "type":"name",
+        "name":"skeleton"
+    }
+    ,
+    {
+        "type":"name",
+        "name":"spider"
+    },
+    {
+        "type":"mod",
+        "mod":"zombie_extreme",
+        "whitelist":[
+            "zombie_extreme:infected",
+            "zombie_extreme:crawler",
+            "zombie_extreme:runner",
+            "zombie_extreme:infected_police"
+        ]
+    }
 ]
+//全局白名单
+var WhiteList = [
+    "zombie_extreme:infected",
+    "zombie_extreme:crawler",
+    "zombie_extreme:runner",
+    "rottencreatures:frostbitten",
+    "minecraft:zombie",
+    "minecraft:husk",
+    "zombie_extreme:infected_police"
+]
+//区域黑名单
 var AreaBlackList = [
     {
         "name":"出生点",
@@ -241,8 +284,15 @@ onEvent("entity.spawned",event=>{
     var entity = event.entity;
     var type = entity.getType();
     for(var blacklist of BlackList){
-        if(type.includes(blacklist)){
-            event.cancel()
+        if(blacklist.type.includes("mod")){
+            if(type.includes(blacklist.mod) && (blacklist.whitelist.indexOf(type) == -1)){
+                event.cancel()
+            }
+        }
+        if(blacklist.type.includes("name")){
+            if(type.includes(blacklist.name)){
+                event.cancel()
+            }
         }
     }
 })
@@ -251,7 +301,7 @@ onEvent("entity.spawned",event=>{
     var type = entity.getType();
     const onlinePlayers = Utils.server.players;
     for(var areaBlackList of AreaBlackList){
-        if(inAreasOfName(entity,areaBlackList.name) && areaBlackList.mob.indexOf(type)){
+        if(inAreasOfName(entity,areaBlackList.name) && (areaBlackList.mob.indexOf(type)!=-1)){
             event.cancel()
         }
     }

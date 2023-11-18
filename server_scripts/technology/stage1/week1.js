@@ -318,6 +318,8 @@ onEvent('recipes', event => {
   }
       //安山合金 工序
       event.shapeless('kubejs:andesite_alloy_dust', ['create:crushed_raw_iron', '2x minecraft:andesite','kubejs:rock'])//安山合金粉末
+      //移除安山合金
+      event.remove({output:'create:andesite_alloy'})
       //烧制安山合金
       event.custom({
             "type": "minecraft:blasting",
