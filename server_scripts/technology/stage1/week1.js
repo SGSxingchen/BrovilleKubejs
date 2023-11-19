@@ -21,7 +21,7 @@ onEvent('recipes', event => {
     event.shapeless('immersiveengineering:dust_iron',['2x create:crushed_raw_iron'])
     //铁粉烧铁锭
     event.custom({
-        "type": "minecraft:blasting",
+        "type": "minecraft:smelting",
         "ingredient": {
           "item": 'immersiveengineering:dust_iron'
         },
@@ -157,53 +157,9 @@ onEvent('recipes', event => {
       }
     })    
     //合成工程师工作台
-    event.custom({
-      "type": "minecraft:crafting_shaped",
-      "pattern": [
-        "sss",
-        "rcr",
-        "r r"
-      ],
-      "key": {
-        "s": {
-          "tag": "minecraft:wooden_slabs"
-        },
-        "r": {
-          "tag": "forge:rods/wooden"
-        },
-        "c": {
-          "item": "minecraft:crafting_table"
-        }
-      },
-      "result": {
-        "item": "immersiveengineering:craftingtable"
-      }
-    })
+    event.custom({"type":"minecraft:crafting_shaped","pattern":["sss","rcr","r r"],"key":{"s":{"tag":"forge:treated_wood_slab"},"r":{"tag":"forge:rods/treated_wood"},"c":{"item":"minecraft:crafting_table"}},"result":{"item":"immersiveengineering:craftingtable"}})
     //合成工程师装配台
-    event.custom({
-      "type": "minecraft:crafting_shaped",
-      "pattern": [
-        "iss",
-        "c f"
-      ],
-      "key": {
-        "i": {
-          "tag": "forge:ingots/iron"
-        },
-        "s": {
-          "tag": "minecraft:wooden_slabs"
-        },
-        "c": {
-          "item": "immersiveengineering:craftingtable"
-        },
-        "f": {
-          "tag": "forge:fences/wooden"
-        }
-      },
-      "result": {
-        "item": "immersiveengineering:workbench"
-      }
-    })
+    event.custom({"type":"minecraft:crafting_shaped","pattern":["iss","c f"],"key":{"i":{"tag":"forge:ingots/iron"},"s":{"tag":"forge:treated_wood_slab"},"c":{"item":"immersiveengineering:craftingtable"},"f":{"item":"immersiveengineering:treated_fence"}},"result":{"item":"immersiveengineering:workbench"}})
     //合成低压接线器
     event.shaped(
       "4x immersiveengineering:connector_lv",
@@ -318,11 +274,9 @@ onEvent('recipes', event => {
   }
       //安山合金 工序
       event.shapeless('kubejs:andesite_alloy_dust', ['create:crushed_raw_iron', '2x minecraft:andesite','kubejs:rock'])//安山合金粉末
-      //移除安山合金
-      event.remove({output:'create:andesite_alloy'})
       //烧制安山合金
       event.custom({
-            "type": "minecraft:blasting",
+            "type": "minecraft:smelting",
             "ingredient": {
               "item": "kubejs:andesite_alloy_dust"
             },
@@ -390,7 +344,7 @@ onEvent('recipes', event => {
       })
       //第三步提炼
       event.custom({
-        "type": "minecraft:blasting",
+        "type": "minecraft:smelting",
         "ingredient": {
           "item": "kubejs:crushed_middle_ore"
         },
@@ -443,7 +397,7 @@ onEvent('recipes', event => {
 
       //烧矿镍 铅 锌
       event.custom({
-        "type": "minecraft:blasting",
+        "type": "minecraft:smelting",
         "ingredient": {
           "item": 'immersiveengineering:raw_nickel'
         },
@@ -452,7 +406,7 @@ onEvent('recipes', event => {
         "cookingtime": 600
       })
       event.custom({
-        "type": "minecraft:blasting",
+        "type": "minecraft:smelting",
         "ingredient": {
           "item": 'immersiveengineering:raw_lead'
         },
@@ -461,7 +415,7 @@ onEvent('recipes', event => {
         "cookingtime": 600
       })
       event.custom({
-        "type": "minecraft:blasting",
+        "type": "minecraft:smelting",
         "ingredient": {
           "item": 'create:raw_zinc'
         },

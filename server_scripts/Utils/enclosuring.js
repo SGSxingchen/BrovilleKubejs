@@ -1,4 +1,3 @@
-//code by Yakumo_UUZ
 var enclosureX1 = ""
 var enclosureY1 = ""
 var enclosureZ1 = ""
@@ -25,7 +24,6 @@ onEvent('block.right_click', event =>{
     let enY = event.block.y
     let enZ = event.block.z
     if(event.item.id == 'kubejs:enclosure_tool'){
-        enclosure = JsonIO.read('kubejs/serverJson/enclosure.json')//读取文件
         if(!event.player.stages.has("enclosuring1")){
             event.player.stages.add("enclosuring1")
             event.player.tell(`设置了第一个点[X:${enX},Y:${enY},Z:${enZ}]`)
@@ -42,7 +40,6 @@ onEvent('block.left_click', event =>{
     let enY = event.block.y
     let enZ = event.block.z
     if(event.item.id == 'kubejs:enclosure_tool'){
-        enclosure = JsonIO.read('kubejs/serverJson/enclosure.json')//读取文件
         if(!event.player.stages.has("enclosuring2")){
             event.player.stages.add("enclosuring2")
             event.player.tell(`设置了第二个点[X:${enX},Y:${enY},Z:${enZ}]`)

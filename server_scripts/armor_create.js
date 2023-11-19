@@ -11,8 +11,6 @@ onEvent('recipes', event => {
     event.shaped('zombiekit:crude_nitrate', ['CAC','ABA','CAC'], {A:'minecraft:gunpowder',B:'minecraft:glass_bottle',C:'zombiekit:saltpeter'})//粗硝
     event.blasting('zombiekit:hydrogen_nitrate', 'zombiekit:crude_nitrate')//硝酸
     event.shaped('zombiekit:nitrocellulose', [' S ','SAS',' S '], {S:'zombiekit:fibre',A:'zombiekit:hydrogen_nitrate'})//硝酸纤维
-    //纤维
-    event.shapeless('zombiekit:fibre', ['minecraft:wheat', 'farmersdelight:tree_bark','minecraft:sugar_cane','minecraft:string'])
     //锁链盔甲
 	event.shaped(Item.of('minecraft:chainmail_chestplate', '{Damage:215}'),['S S','SSS','SSS'], {S:'zombiekit:iron_wire'})
     event.shaped(Item.of('minecraft:chainmail_leggings', '{Damage:200}'), ['SSS','S S','S S'], {S:'zombiekit:iron_wire'})

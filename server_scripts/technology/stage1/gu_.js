@@ -1,14 +1,6 @@
 onEvent('recipes', event => {
     //丝线布
     event.shapeless('kubejs:string_rag', ['3x minecraft:string'])
-    //骨粉
-    event.remove({output:'minecraft:bone_meal'})
-    //骨块
-    event.remove({output:'minecraft:bone_block'})
-    //移除熔炉
-    event.remove({output:'minecraft:furnace'})
-    //移除篝火
-    event.remove({output:'minecraft:campfire'})
     //合成骨块
     event.shapeless('minecraft:bone_block', ['minecraft:flint','2x minecraft:bone','kubejs:string_rag'])
     //切成骨片

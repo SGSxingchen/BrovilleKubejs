@@ -6,11 +6,12 @@ onEvent('recipes', event => {
 		event.remove({ mod: 'sophisticatedbackpacks' })
 		event.remove({ mod: 'zombie_extreme' })
 		event.remove({ mod: 'zombiekit' })
-		event.remove({ mod: 'create_sa' })
-		event.remove({ mod: 'create' })
-		event.remove({ mod: 'k_turrets' })
-		event.remove({ mod: 'immersiveengineering' })
+		// event.remove({ mod: 'create_sa' })
+		// event.remove({ mod: 'create' })
+		// event.remove({ mod: 'k_turrets' })
+		// event.remove({ mod: 'immersiveengineering' })
 		event.remove({ mod: 'additionalguns' })
+		event.remove({ mod: 'securitycraft'})
     }
     ///删除物品配方
     //【固定ban位】

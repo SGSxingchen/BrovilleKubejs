@@ -14,12 +14,16 @@ onEvent("lootjs", (event) => {
     for(var mob in ETypeMob){
         event
         .addEntityLootModifier(mob)
-        .randomChance(0.05) // 5% 概率
+        .randomChance(0.1) // 10% 概率
         .addLoot("kubejs:scarpiron");
         event
         .addEntityLootModifier(mob)
         .randomChance(0.05) // 5% 概率
         .addLoot('minecraft:leather');
+        event
+        .addEntityLootModifier(mob)
+        .randomChance(1) // 100% 概率
+        .addLoot('minecraft:rotten_flesh');
     }
 });
 onEvent("lootjs", (event) => {
@@ -32,5 +36,9 @@ onEvent("lootjs", (event) => {
         .addEntityLootModifier(mob)
         .randomChance(0.1) // 5% 概率
         .addLoot('minecraft:leather');
+        event
+        .addEntityLootModifier(mob)
+        .randomChance(1) // 100% 概率
+        .addLoot('minecraft:rotten_flesh');
     }
 });

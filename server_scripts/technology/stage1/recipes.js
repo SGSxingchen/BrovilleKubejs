@@ -30,7 +30,7 @@ onEvent('recipes', event =>{
 
 onEvent('recipes', event =>{
 
-
+    //火把
     event.shaped('hardcore_torches:unlit_torch',[
         'F',
         "S"
@@ -38,7 +38,7 @@ onEvent('recipes', event =>{
         F:'zombiekit:fibre',
         S:'#forge:rods/wooden'
     })
-
+    //移除纤维
     event.remove({output:'zombiekit:fibre'})
     event.shapeless('zombiekit:fibre', ['3x farmersdelight:straw'])
 
@@ -111,6 +111,7 @@ onEvent('recipes', event =>{
 			"count":1
 		  }]
 	})
+    //移除绳子
     event.remove({id:"farmersdelight:lead_from_straw"})
     event.remove({id:"farmersdelight:rope"})
 
@@ -130,6 +131,8 @@ onEvent('recipes', event =>{
     ],{
         B:'farmersdelight:tree_bark'
     })
+
+    //移除工作台
     event.remove({output:'minecraft:crafting_table'})
     event.shaped('minecraft:crafting_table',[
         "IA",

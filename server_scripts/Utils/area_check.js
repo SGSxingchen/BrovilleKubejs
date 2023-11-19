@@ -245,6 +245,18 @@ var BlackList = [
         "name":"spider"
     },
     {
+        "type":"name",
+        "name":"endermanr"
+    },
+    {
+        "type":"name",
+        "name":"squid"
+    },
+    {
+        "type":"name",
+        "name":"phantom"
+    },
+    {
         "type":"mod",
         "mod":"zombie_extreme",
         "whitelist":[
